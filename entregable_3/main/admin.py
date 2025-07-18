@@ -1,3 +1,5 @@
 from django.contrib import admin
+from .models import consolas, accesorios, juegos
+register_models = [consolas, accesorios, juegos]
 
-# Register your models here.
+admin.site.register(register_models)
