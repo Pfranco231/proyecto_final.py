@@ -1,12 +1,19 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Página de Inicio</title>
-</head>
-<body>
-    <h1>Bienvenido a la Página de Inicio</h1>
-    <p>Esta es la página principal de la aplicación.</p>
-</body>
-</html>
+{% extends "index.html" %}
+
+{% block title %}Home{% endblock %}
+
+{% block extra_head %}
+   
+
+{% endblock %}
+
+{% block main %}
+<div>
+    <center><h3>Bienvenido al listado de consolas</h3></center>
+    <center><p>Aqui encontraras un listado de consolas de Playstation y Xbox</p></center>
+    <center><a href="">Listado de las consolas</a> <h6>-</h6> <a href="">Agregar una Consola</a></center>
+</div>
+{% endblock %}
+{% block footer %}<p>Derechos reservados &copy; 2024</p>
+<p>Creado por Franco Papeschi</p>
+{% endblock %}
