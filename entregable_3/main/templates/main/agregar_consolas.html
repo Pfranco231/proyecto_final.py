@@ -1,0 +1,19 @@
+{% extends "index.html" %}
+
+{% block title %}Agregar Consolas{% endblock %}
+
+
+{% block main %}
+<div>
+    <form method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}  <!-- Renderiza el formulario como párrafos -->
+    
+
+        <button type="submit">Crear Curso</button>
+    </form>
+</div>
+{% endblock %}
+{% block footer %}<p>Derechos reservados &copy; 2024</p>
+<p>Creado por Franco Papeschi</p>
+{% endblock %}

@@ -14,7 +14,7 @@ class accesoriosForm(forms.Form):
     precio = forms.IntegerField()
     
 
-class juegos(forms.Form):
+class juegosForm(forms.Form):
     juego = forms.CharField(max_length=100)
     empresa = forms.CharField(max_length=100)
     categoria = forms.CharField(max_length=100)

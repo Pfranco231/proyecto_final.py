@@ -20,42 +20,38 @@ def agregar_consolas(request):
             return redirect('inicio')
         
     elif request.method == 'GET':
-        form = consolasForm()                                          #aca mandamo el formulario vacio
+        form = consolasForm()                                #aca mandamo el formulario vacio
         return render(request, "main/agregar_consolas.html", {"form": form})
     
 
-    def agregar_juegos(request):
-        if request.method == 'POST':
-            #no se por me da advertencia
-            form = juegosForm(request.POST)
-            if form.is_valid():
-                juegos = juegos(
-                    #resivar esto
-                    nombre=form.cleaned_data['nombre'],
-                    genero=form.cleaned_data['genero'],
-                    precio=form.cleaned_data['precio'],
-                    fecha_de_lanzamiento=form.cleaned_data['fecha_de_lanzamiento'],
-                )
-                juegos.save()
-                return redirect('inicio')
-        elif request.method == 'GET':
-            #y aqui tambien
-            form = juegosForm()
-            return render(request, "main/agregar_juegos.html", {"form": form})
+def agregar_juegos(request):
+    if request.method == 'POST':
+        form = juegosForm(request.POST)
+        if form.is_valid():
+            juegos = juegos(
+                juego=form.cleaned_data['juego'],
+                empresa=form.cleaned_data['empresa'],
+                categoria=form.cleaned_data['cateria'],
+                precio=form.cleaned_data['precio'],
+            )
+            juegos.save()
+            return redirect('inicio')
+    elif request.method == 'GET':
+        form = juegosForm()
+        return render(request, "main/agregar_juegos.html", {"form": form})
 
-    def agregar_accesorios(request):
-        if request.method == 'POST':
-            form = accesoriosForm(request.POST)
-            if form.is_valid():
-                accesorios = accesorios(
-                    #revisar esto
-                    nombre=form.cleaned_data['nombre'],
-                    tipo=form.cleaned_data['tipo'],
-                    precio=form.cleaned_data['precio'],
-                    compatibilidad=form.cleaned_data['compatibilidad'],
-                )
-                accesorios.save()
-                return redirect('inicio')
-        elif request.method == 'GET':
-            form = accesoriosForm()
-            return render(request, "main/agregar_accesorios.html", {"form": form})
+def agregar_accesorios(request):
+    if request.method == 'POST':
+        form = accesoriosForm(request.POST)
+        if form.is_valid():
+            accesorios = accesorios(
+                producto=form.cleaned_data['producto'],
+                empresa=form.cleaned_data['empresa'],
+                duracion_bateria=form.cleaned_data['duracion_bateria'],
+                precio=form.cleaned_data['precio'],
+            )
+            accesorios.save()
+            return redirect('inicio')
+    elif request.method == 'GET':
+        form = accesoriosForm()
+        return render(request, "main/agregar_accesorios.html", {"form": form})
