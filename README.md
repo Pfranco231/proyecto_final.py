@@ -11,5 +11,5 @@
 
 4. Formulario para ingresar datos a las 3 clases (✅)
 
-5. Y un formulario para buscar algo en la BD (solo uno) (❌)
+5. Y un formulario para buscar algo en la BD (solo uno) (✅)
 ---
