@@ -1,6 +1,6 @@
 {% extends "index.html" %}
 
-{% block title %}Agregar Consolas{% endblock %}
+{% block title %}Agregar Juegos{% endblock %}
 
 
 {% block main %}
@@ -8,7 +8,7 @@
     <form method="POST">
         {% csrf_token %}
         {{ form.as_p }}
-        <button type="submit">Agregar Consola</button>
+        <button type="submit">Agregar Juego</button>
     </form>
 </div>
 {% endblock %}

@@ -4,7 +4,7 @@ class consolasForm(forms.Form):
     modelo = forms.CharField(max_length=100)
     empresa = forms.CharField(max_length=100)
     precio = forms.IntegerField()
-    fecha_de_creacion = forms.DateField()
+    fecha_de_creacion = forms.DateField(label='Fecha de Inicio', widget=forms.SelectDateWidget())
 
 
 class accesoriosForm(forms.Form):
