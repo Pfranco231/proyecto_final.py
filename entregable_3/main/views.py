@@ -55,3 +55,13 @@ def agregar_accesorios(request):
     elif request.method == 'GET':
         form = accesoriosForm()
         return render(request, "main/agregar_accesorios.html", {"form": form})
+
+
+def consola(request):
+    consolas_variable = consolas.objects.all()
+    return render(request, "main/consola.html", {"consolas": consolas_variable})
+
+def buscar_consola(request):
+    modelo = request.GET.get('modelo', '')
+    consola_variable = consolas.objects.filter(modelo__icontains=modelo)
+    return render(request, "main/consola.html", {"consolas": consola_variable, "modelo": modelo})

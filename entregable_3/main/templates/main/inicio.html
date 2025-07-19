@@ -12,7 +12,7 @@
     <center><h3>Bienvenido al listado de consolas</h3></center>
     <center><p>Aqui encontraras un listado de consolas de Playstation y Xbox</p></center>
     <div style="display: flex; justify-content: center; gap: 15px;">
-        <a href="" style="color: rgb(131, 171, 90);">Listado de las consolas</a>
+        <a href="{% url 'consola' %}" style="color: rgb(131, 171, 90);">Listado de las consolas</a>
         <a href="{% url 'agregar-consolas' %}">Agregar una Consola</a>
         <a href="{% url 'agregar-accesorios' %}">Agregar un Accesorio</a>
         <a href="{% url 'agregar-juegos' %}">Agregar un Juego</a>

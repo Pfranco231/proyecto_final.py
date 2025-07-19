@@ -1,0 +1,26 @@
+{% extends "index.html" %}
+
+{% block title %}Buscar Consolas{% endblock %}
+
+
+{% block main %}
+<div>
+    <form method="get" action="{% url 'buscar-consola' %}">
+        <label for="nombre">Modelo de la consola:</label>
+        <input type="text" id="modelo" name="modelo" value="{{ modelo }}">
+        <button type="submit">Buscar</button>
+    </form>
+</div>
+<ul>
+    {% for i in consolas %}
+        <li>{{ i.modelo }} - {{ i.fecha_de_creacion }}</li>
+    {% empty %}
+        <li>No se encontraron Consolas.</li>
+    {% endfor %}
+</ul>
+{% endblock %}
+
+
+{% block footer %}<p>Derechos reservados &copy; 2024</p>
+<p>Creado por Franco Papeschi</p>
+{% endblock %}
