@@ -9,4 +9,5 @@ urlpatterns = [
     path('agregar-accesorios/', agregar_accesorios, name='agregar-accesorios'),
     path('consola/', consola, name='consola'),
     path('consola/buscar/', buscar_consola, name='buscar-consola'),
+
 ]
