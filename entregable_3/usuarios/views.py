@@ -10,19 +10,36 @@ from django.views import View
 from .models import Avatar
 from django.contrib.auth.mixins import LoginRequiredMixin
 
-class UserRegisterView(CreateView):
-    model = User
-    form_class = RegisterForm
+class UserRegisterView(View):
     template_name = 'usuarios/register.html'
-    success_url = reverse_lazy('login')
+    success_url = reverse_lazy('inicio')
 
-    def form_valid(self, form):
-        response = super().form_valid(form)
-        user = authenticate(
-            username=form.cleaned_data["username"], password=form.cleaned_data["password1"])
-        if user:
-            login(self.request, user)
-        return response
+    def get(self, request, *args, **kwargs):
+        user_form = RegisterForm()
+        avatar_form = AvatarForm()
+        return render(request, self.template_name, {
+            'user_form': user_form,
+            'avatar_form': avatar_form,
+        })
+
+    def post(self, request, *args, **kwargs):
+        user_form = RegisterForm(request.POST)
+        avatar_form = AvatarForm(request.POST, request.FILES)
+
+        if user_form.is_valid() and avatar_form.is_valid():
+            user = user_form.save()
+            avatar = avatar_form.save(commit=False)
+            avatar.user = user
+            avatar.save()
+
+            login(request, user)  # Loguear automáticamente
+            return redirect(self.success_url)
+
+        return render(request, self.template_name, {
+            'user_form': user_form,
+            'avatar_form': avatar_form,
+        })
+
 
 class CustomLoginView(LoginView):
     template_name = 'usuarios/login.html'
