@@ -1,0 +1,11 @@
+{% extends "index.html" %}
+
+{% block main %}
+<h2>¿Estás seguro que querés eliminar esta consola?</h2>
+<p>{{ object.modelo }} - {{ object.empresa }}</p>
+<form method="post">
+  {% csrf_token %}
+  <button type="submit">Sí, eliminar</button>
+  <a href="{% url 'inicio' %}">Cancelar</a>
+</form>
+{% endblock %}

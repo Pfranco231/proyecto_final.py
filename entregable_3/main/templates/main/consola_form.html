@@ -1,0 +1,12 @@
+{% extends "index.html" %}
+
+{% block main %}
+<h2>Crear Consola</h2>
+<form method="post" enctype="multipart/form-data">
+  {% csrf_token %}
+  {{ form.as_p }}
+  <label for="">Formato de fecha: aaaa-mm-dd</label>
+  <button type="submit">Guardar</button>
+</form>
+<a href="{% url 'inicio' %}">Volver al inicio</a>
+{% endblock %}

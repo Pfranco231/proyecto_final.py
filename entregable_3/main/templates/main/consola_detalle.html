@@ -1,0 +1,11 @@
+{% extends "index.html" %}
+
+{% block main %}
+<h2>{{ consola.modelo }}</h2>
+<p>Empresa: {{ consola.empresa }}</p>
+<p>Precio: ${{ consola.precio }}</p>
+<p>Fecha de creación: {{ consola.fecha_de_creacion }}</p>
+
+<a href="{% url 'inicio' %}">Volver</a>
+
+{% endblock %}

@@ -3,11 +3,13 @@ from .views import *
 
 urlpatterns = [
     # Ruta para la vista de inicio
-    path('', inicio, name='inicio'),
-    path('agregar-consolas/', agregar_consolas, name='agregar-consolas'),
+    path('', InicioView.as_view(), name='inicio'),
     path('agregar-juegos/', agregar_juegos, name='agregar-juegos'),
     path('agregar-accesorios/', agregar_accesorios, name='agregar-accesorios'),
-    path('consola/', consola, name='consola'),
-    path('consola/buscar/', buscar_consola, name='buscar-consola'),
+    path('about/', AboutView.as_view(), name='about'),
+    path('consola/<int:pk>/', ConsolaDetailView.as_view(), name='detalle-consola'),
+    path('crear-consola/', ConsolaCreateView.as_view(), name='crear-consola'),
+    path('editar-consola/<int:pk>/', ConsolaUpdateView.as_view(), name='editar-consola'),
+    path('eliminar-consola/<int:pk>/', ConsolaDeleteView.as_view(), name='eliminar-consola'),
 
 ]

@@ -1,7 +1,7 @@
 from django.db import models
 
 class consolas(models.Model):
-    imagen = models.ImageField(upload_to='consolas/', null=True, blank=True)
+    imagen = models.ImageField(upload_to='consolas_img/', null=True, blank=True)
     modelo = models.CharField(max_length=100)
     empresa = models.CharField(max_length=100)
     precio = models.IntegerField()

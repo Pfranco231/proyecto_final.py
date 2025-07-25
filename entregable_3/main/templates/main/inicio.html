@@ -2,23 +2,47 @@
 
 {% block title %}Home{% endblock %}
 
-{% block extra_head %}
-   
-
-{% endblock %}
 
 {% block main %}
 <div>
-    <center><h3>Bienvenido al listado de consolas</h3></center>
-    <center><p>Aqui encontraras un listado de consolas de Playstation y Xbox</p></center>
     <div style="display: flex; justify-content: center; gap: 15px;">
-        <a href="{% url 'consola' %}" style="color: rgb(131, 171, 90);">Listado de las consolas</a>
-        <a href="{% url 'agregar-consolas' %}">Agregar una Consola</a>
+        <a href="{% url 'crear-consola' %}">Agregar una Consola</a>
         <a href="{% url 'agregar-accesorios' %}">Agregar un Accesorio</a>
         <a href="{% url 'agregar-juegos' %}">Agregar un Juego</a>
     </div>
 </div>
+  <center><h1>Bienvenido al <strong style="color: teal;">núcleo</strong> de los gamers</h1></center>
+
+<div style="display: flex; justify-content: center; margin-bottom: 10px;">
+    <form method="get">
+      <input type="text" name="modelo" placeholder="Buscar consola..." value="{{ modelo }}">
+      <button type="submit" class="boton-buscar">Buscar</button>
+    </form>
+</div>
+
+  {% if consolas %}
+    <div style="display: flex; justify-content: center; gap: 10px; flex-wrap: wrap;">
+      {% for consola in consolas %}
+        <div class="card" style="width: 18rem; max-height: 500px;">
+            {% if consola.imagen %}
+                <img src="{{ consola.imagen.url }}" alt="{{ consola.modelo }}" class="card-img-top">
+            {% else %}
+                <p>Sin imagen</p>
+            {% endif %}
+            <div class="card-body">
+                <h5 class="card-title"><strong>{{ consola.modelo }}</strong> - {{ consola.empresa }}</h5>
+                <p class="card-text">Precio: ${{ consola.precio }} <br> Fecha: {{ consola.fecha_de_creacion }} </p>
+                <a href="{% url 'detalle-consola' consola.pk %}" class="btn btn-primary">Leer Mas...</a>
+                <a href="{% url 'editar-consola' consola.pk %}">Editar</a>
+                <a href="{% url 'eliminar-consola' consola.pk %}">Eliminar</a>
+            </div>
+        </div>
+      {% endfor %}
+    </div>
+  {% else %}
+    <p>No hay consolas aún.</p>
+  {% endif %}
 {% endblock %}
-{% block footer %}<p>Derechos reservados &copy; 2024</p>
+{% block footer %}<p>Derechos reservados &copy; 2025</p>
 <p>Creado por Franco Papeschi</p>
 {% endblock %}

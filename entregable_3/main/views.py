@@ -1,27 +1,27 @@
 from django.shortcuts import render, redirect
 from .models import *
 from .forms import *
+from django.views.generic import TemplateView, ListView, DetailView
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
+from django.urls import reverse_lazy
 
-def inicio(request):
-    return render(request, "main/inicio.html")
 
-def agregar_consolas(request):
-    if request.method == 'POST':
-        form = consolasForm(request.POST)
-        if form.is_valid():
-            consola_de_juegos = consolas(
-                #cleaned_data es lo que se guarda en el formulario
-                modelo=form.cleaned_data['modelo'],
-                empresa=form.cleaned_data['empresa'],
-                precio=form.cleaned_data['precio'],
-                fecha_de_creacion=form.cleaned_data['fecha_de_creacion'],
-            )
-            consola_de_juegos.save()
-            return render(request, "main/correcto.html")
-        
-    elif request.method == 'GET':
-        form = consolasForm()                                #aca mandamo el formulario vacio
-        return render(request, "main/agregar_consolas.html", {"form": form})
+class InicioView(ListView):
+    model = consolas
+    template_name = 'main/inicio.html'
+    context_object_name = 'consolas'
+    
+    def get_queryset(self):
+        modelo = self.request.GET.get('modelo', '')
+        if modelo:
+            return consolas.objects.filter(modelo__icontains=modelo)
+        return consolas.objects.all()
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['modelo'] = self.request.GET.get('modelo', '')
+        return context
+    
     
 
 def agregar_juegos(request):
@@ -57,11 +57,33 @@ def agregar_accesorios(request):
         return render(request, "main/agregar_accesorios.html", {"form": form})
 
 
-def consola(request):
-    consolas_variable = consolas.objects.all()
-    return render(request, "main/consola.html", {"consolas": consolas_variable})
+class AboutView(TemplateView):
+    template_name = "main/about.html"
 
-def buscar_consola(request):
-    modelo = request.GET.get('modelo', '')
-    consola_variable = consolas.objects.filter(modelo__icontains=modelo)
-    return render(request, "main/consola.html", {"consolas": consola_variable, "modelo": modelo})
+
+
+class ConsolaDetailView(DetailView):
+    model = consolas
+    template_name = 'main/consola_detalle.html'
+    context_object_name = 'consola'
+    
+
+class ConsolaCreateView(CreateView):
+    model = consolas
+    template_name = 'main/consola_form.html'
+    fields = ['imagen', 'modelo', 'empresa', 'precio', 'fecha_de_creacion']
+    success_url = reverse_lazy('inicio')
+
+
+class ConsolaUpdateView(UpdateView):
+    model = consolas
+    template_name = 'main/consola_form.html'
+    fields = ['imagen', 'modelo', 'empresa', 'precio', 'fecha_de_creacion',]
+    success_url = reverse_lazy('inicio')
+    
+
+
+class ConsolaDeleteView(DeleteView):
+    model = consolas
+    template_name = 'main/consola_confirm_delete.html'
+    success_url = reverse_lazy('inicio')
