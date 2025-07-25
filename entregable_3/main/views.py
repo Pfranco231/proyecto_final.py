@@ -4,6 +4,8 @@ from .forms import *
 from django.views.generic import TemplateView, ListView, DetailView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 
 class InicioView(ListView):
@@ -67,15 +69,15 @@ class ConsolaDetailView(DetailView):
     template_name = 'main/consola_detalle.html'
     context_object_name = 'consola'
     
-
-class ConsolaCreateView(CreateView):
+#@login_required
+class ConsolaCreateView(LoginRequiredMixin, CreateView):
     model = consolas
     template_name = 'main/consola_form.html'
     fields = ['imagen', 'modelo', 'empresa', 'precio', 'fecha_de_creacion']
     success_url = reverse_lazy('inicio')
 
-
-class ConsolaUpdateView(UpdateView):
+#@login_required
+class ConsolaUpdateView(LoginRequiredMixin, UpdateView):
     model = consolas
     template_name = 'main/consola_form.html'
     fields = ['imagen', 'modelo', 'empresa', 'precio', 'fecha_de_creacion',]
@@ -83,7 +85,10 @@ class ConsolaUpdateView(UpdateView):
     
 
 
-class ConsolaDeleteView(DeleteView):
+#@login_required
+class ConsolaDeleteView(LoginRequiredMixin, DeleteView):
     model = consolas
     template_name = 'main/consola_confirm_delete.html'
     success_url = reverse_lazy('inicio')
+    
+

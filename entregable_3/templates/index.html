@@ -53,6 +53,20 @@
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item"><a class="nav-link" href="{% url 'inicio' %}">Inicio</a></li>
                     <li class="nav-item"><a class="nav-link" href="{% url 'about' %}">Acerca De Mi</a></li>
+                    {% if user.avatar.imagen %}
+                        <img style="width: 100px; height: 100px; border-radius: 50px;" src="{{user.avatar.imagen.url}}" alt="">
+                    {% endif %}
+                     {% if user.is_authenticated %}
+                            <li class="nav-item">
+                                <form action="{% url "logout" %}" method="POST">
+                                {% csrf_token %}
+                                <button type="submit" class="btn btn-primary">Logout</button>
+                                </form>
+                            </li>
+                        {% else %}
+                            <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="{% url 'login' %}">Login</a></li>
+                            <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="{% url 'register' %}">Registro</a></li>
+                        {% endif %}    
                 </ul>
             </div>
         </div>
