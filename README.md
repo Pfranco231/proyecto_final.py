@@ -17,9 +17,7 @@ Este repositorio contiene el código fuente y la documentación del proyecto fin
 Proyecto desarrollado en Django que simula una web de coleccionistas de consolas. Permite a los usuarios registrarse, iniciar sesión, gestionar su perfil con avatar e interactuar con una base de datos de consolas mediante funcionalidades CRUD (crear, leer, actualizar y eliminar).
 
 ### VIDEO: Del funcionamiento de la pagina:
-'''bash
-INSERT VIDEO MEDIA
-'''
+[Ver el Video](https://youtu.be/xmYTe6nN2vw)
 
 ## Instalación
 
