@@ -30,7 +30,7 @@ Proyecto desarrollado en Django que simula una web de coleccionistas de consolas
 2. Crea y activa un entorno virtual:
     ```bash
     python -m venv venv
-    source venv/bin/activate  # En Windows: venv\Scripts\activate
+    source venv/bin/activate  # En Windows:  cd venv\Scripts then .\activate
     ```
 
 3. Instala las dependencias:
